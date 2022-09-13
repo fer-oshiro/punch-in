@@ -5,6 +5,7 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "dayjs": "^1.11.5",
     "dripsy": "^3.6.0",
     "expo-linking": "^3.0.0",
     "moti": "0.19.0-alpha.6",

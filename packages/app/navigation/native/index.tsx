@@ -41,7 +41,7 @@ export function NativeNavigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Calendar" component={CalendarScreen} />
-      <Tab.Screen name="PunchIn" component={HomeScreen} />
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Stats" component={UserDetailScreen} />
       <Tab.Screen name="Setting" component={UserDetailScreen} />
     </Tab.Navigator>

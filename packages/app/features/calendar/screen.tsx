@@ -1,63 +1,53 @@
-import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
+import React from 'react'
+import dayjs from 'dayjs'
+import { Text, useSx, View, H1, P, Row, Pressable } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
+import { firstLetterUppercase, getArrayCalendar } from '../../utils'
+import { AntDesign } from '@expo/vector-icons'
+import {Week} from './Week'
 
 export function CalendarScreen() {
-  const sx = useSx()
+  const [date, setDate] = React.useState(new Date())
+
+  function handleAddMonth() {
+    setDate(dayjs(date).add(1, 'month').toDate())
+  }
+
+  function handleSubtractMonth() {
+    setDate(dayjs(date).subtract(1, 'month').toDate())
+  }
+
+  function handleSetToday() {
+    setDate(new Date())
+  }
+
+  const month = dayjs(date).format('MMMM')
+  const monthFormatted = firstLetterUppercase(month)
+
+  const arrayCalendar = getArrayCalendar(date)
 
   return (
     <View
-      sx={{ flex: 1, justifyContent: 'center', alignItems: 'center', p: 16 }}
+      sx={{
+        flex: 1,
+        alignItems: 'center',
+        p: 16,
+        backgroundColor: '$background',
+      }}
     >
-      <H1 sx={{ fontWeight: '800', color: '$green.light' }}>Welcome to Solito.</H1>
-      <View sx={{ maxWidth: 600 }}>
-        <P sx={{ textAlign: 'center' }}>
-          Here is a basic starter to show you how you can navigate from one
-          screen to another. This screen uses the same code on Next.js and React
-          Native.
-        </P>
-        <P sx={{ textAlign: 'center' }}>
-          Solito is made by{' '}
-        </P>
+      <View sx={{flexDirection:'row', alignItems:'center', alignSelf:'flex-start', minWidth: 300, justifyContent: 'space-between'}}>
+        <AntDesign name="left" size={40} color="black"  style={{marginRight: 20}} onPress={handleSubtractMonth}/>
+        <H1 sx={{ fontWeight: '800', color: '$black' }}>{monthFormatted}</H1>
+        <AntDesign name="right" size={40} color="black" style={{marginLeft: 20}} onPress={handleAddMonth}/>
       </View>
-      <View sx={{ height: 32 }} />
-      <Row>
-        <TextLink
-          href="/user/fernando"
-          textProps={{
-            style: sx({ fontSize: 16, fontWeight: 'bold', color: 'blue' }),
-          }}
-        >
-          Regular Link
-        </TextLink>
-        <View sx={{ width: 32 }} />
-        <MotiLink
-          href="/user/fernando"
-          animate={({ hovered, pressed }) => {
-            'worklet'
 
-            return {
-              scale: pressed ? 0.95 : hovered ? 1.1 : 1,
-              rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg',
-            }
-          }}
-          from={{
-            scale: 0,
-            rotateZ: '0deg',
-          }}
-          transition={{
-            type: 'timing',
-            duration: 150,
-          }}
-        >
-          <Text
-            selectable={false}
-            sx={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}
-          >
-            Moti Link
-          </Text>
-        </MotiLink>
-      </Row>
+      <Pressable onPress={handleSetToday} sx={{px: 20,py:10, backgroundColor: '$caramel', borderRadius: 4, alignSelf:'flex-end', m: 15}}>
+        <Text>Hoje</Text>
+      </Pressable>
+
+      {arrayCalendar.map((week) => <Week key={week} week={week} />)}
+  
     </View>
   )
 }

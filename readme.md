@@ -1,9 +1,8 @@
 # Punch In
 
-
 ## Tecnologia utilizadas
-👾 [Solito](https://example.solito.dev) - template para navegação cross-platform 
-[Icon](https://www.svgrepo.com/collection/miscellaneous) - Ícones Principais
+- [Solito](https://example.solito.dev) - template para navegação cross-platform 
+- [Icon](https://www.svgrepo.com/collection/miscellaneous) - Ícones Principais
 - `moti` for animations
 - `dripsy` for theming/design (you can bring your own, too)
 - Expo SDK 44
