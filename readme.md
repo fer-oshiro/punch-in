@@ -1,8 +1,19 @@
 # Punch In
 
+## Descrição
+Projeto de controle de horário
+
+Telas Principais:
+  - Calendário - visualização geral dos dias trabalhados e batido no sistema
+  - Principal - marcar horário de entrada, saída e feriado
+  - Estatíscas - detalhes do horário trabalhado e horário que precisa bater
+  - Configurações - configurar horário de entrada e saída
+
+Design pode ser visto no [Figma](https://www.figma.com/file/DkGpQY9BoLY6GcjvK0YIbU/Punch-In?node-id=1%3A3)
+
 ## Tecnologia utilizadas
 - [Solito](https://example.solito.dev) - template para navegação cross-platform 
-- [Icon](https://www.svgrepo.com/collection/miscellaneous) - Ícones Principais
+- [Icon](https://www.svgrepo.com/collection/miscellaneous/1) - Ícones Principais
 - `moti` for animations
 - `dripsy` for theming/design (you can bring your own, too)
 - Expo SDK 44
