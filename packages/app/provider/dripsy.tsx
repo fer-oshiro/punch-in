@@ -20,6 +20,18 @@ const theme = makeTheme({
       fontSize: 16,
     },
   },
+  shadows: {
+    md: {
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 2,
+    },
+  },
 })
 
 export function Dripsy({ children }: { children: React.ReactNode }) {
