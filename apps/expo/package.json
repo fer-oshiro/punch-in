@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@expo/ngrok": "^4.1.0",
+    "@react-native-async-storage/async-storage": "~1.17.3",
     "@react-navigation/bottom-tabs": "^6.3.3",
     "app": "*",
     "expo": "^46.0.0",

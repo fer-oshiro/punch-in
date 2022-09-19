@@ -6,9 +6,25 @@ import Timer from './Timer'
 import Header from './Header'
 import { SafeAreaView, ScrollView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { useCountdown } from '../../hooks/useCountDown'
+import { useStopWatch } from '../../hooks/useStopWatch'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export function HomeScreen() {
   const [date, setDate] = React.useState(new Date())
+  const targetDate = useCountdown(date)
+  const {
+    time,
+    isRunning,
+    start,
+    stop,
+    reset,
+    lap,
+    laps,
+    currentLapTime,
+    hasStarted,
+    dataLoaded,
+  } = useStopWatch(date)
 
   function handleAddDay() {
     setDate(new Date(date.getTime() + 86400000))
@@ -20,6 +36,23 @@ export function HomeScreen() {
 
   function handleSetToday() {
     setDate(new Date())
+  }
+
+  function handleClick() {
+    if (isRunning) {
+      stop()
+    } else {
+      start()
+    }
+  }
+
+  function clearAsyncStorage() {
+    console.log('clearing')
+    AsyncStorage.clear()
+  }
+
+  async function getAllAsyncStorageKeys() {
+    AsyncStorage.getAllKeys().then((keys) => console.log(keys))
   }
 
   return (
@@ -52,7 +85,7 @@ export function HomeScreen() {
               fontSizeTime={16}
               label="Temp. Trabalhado"
               img={require('../../assets/blob/blob1.png')}
-              time="1:14"
+              time={time}
             />
             <Timer
               fontSizeLabel={12}
@@ -71,21 +104,9 @@ export function HomeScreen() {
           />
 
           <View sx={{ py: 32, px: 32, width: '100%' }}>
-            <Edit
-              id="1"
-              time="09:00 - 13:34"
-              onPress={() => {
-                console.log('1')
-              }}
-            />
+            <Edit id="1" time="09:00 - 13:34" onPress={handleClick} />
             <Interval time="00:26" />
-            <Edit
-              id="2"
-              time="09:00 -"
-              onPress={() => {
-                console.log('2')
-              }}
-            />
+            <Edit id="2" time="09:00 -" onPress={clearAsyncStorage} />
           </View>
         </View>
 
@@ -106,6 +127,7 @@ export function HomeScreen() {
               mr: 2,
               justifyContent: 'center',
             }}
+            onPress={getAllAsyncStorageKeys}
           >
             <Text
               sx={{
